@@ -1,4 +1,4 @@
-package com.netflixcloneteam1;
+package com.netflixcloneteam1.view;
 
 public class MovieDetailView {
 

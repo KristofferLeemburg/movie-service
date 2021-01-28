@@ -1,10 +1,12 @@
 
-package com.netflixcloneteam1;
+package com.netflixcloneteam1.model;
 
 
-public class HdMovieLogo {
+public class MovieBackground {
+
     private String id;
     private String url;
+    private String lang;
     private String likes;
 
     public String getId() {
@@ -23,6 +25,14 @@ public class HdMovieLogo {
         this.url = url;
     }
 
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
     public String getLikes() {
         return likes;
     }
@@ -30,4 +40,5 @@ public class HdMovieLogo {
     public void setLikes(String likes) {
         this.likes = likes;
     }
+
 }

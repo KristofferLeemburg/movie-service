@@ -1,5 +1,9 @@
-package com.netflixcloneteam1;
+package com.netflixcloneteam1.controller;
 
+import com.netflixcloneteam1.feignclient.TMDB_API;
+import com.netflixcloneteam1.model.MovieTrailer;
+import com.netflixcloneteam1.view.MovieDetailView;
+import com.netflixcloneteam1.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +16,11 @@ public class MovieController {
 @Autowired
 private MovieService movieService;
 //    @GetMapping("/movies/latest")
-//    public Latestdto getLatestdto() {
+//    public Latest getLatest() {
 //       return tmdb_api.getLatest();
 //    }
-
+//    @Autowired
+//    private TMDB_API tmdb_api;
 //    @GetMapping("/movies/trailer")
 //    public MovieTrailer getMovieTrailer() {
 //        return tmdb_api.getVideo();

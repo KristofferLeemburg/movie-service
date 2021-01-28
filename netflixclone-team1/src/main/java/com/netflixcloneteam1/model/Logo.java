@@ -1,5 +1,5 @@
 
-package com.netflixcloneteam1;
+package com.netflixcloneteam1.model;
 
 import java.util.List;
 

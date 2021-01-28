@@ -1,30 +1,35 @@
 
-package com.netflixcloneteam1;
+package com.netflixcloneteam1.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class LatestDto {
-    private Object backdropPath;
-    private List<Object> genres = null;
+public class MovieDetails implements Serializable
+{
+    // @JsonProperty("backdrop_path")
+    private String backdropPath;
+    private List<Genre> genres = null;
     private Integer id;
     private String overview;
     private Integer runtime;
     private String title;
-    private Boolean video;
+    private Videos videos;
+    private Credits credits;
+    private final static long serialVersionUID = 1303507716553349424L;
 
-    public Object getBackdropPath() {
+    public String getBackdropPath() {
         return backdropPath;
     }
 
-    public void setBackdropPath(Object backdropPath) {
+    public void setBackdropPath(String backdropPath) {
         this.backdropPath = backdropPath;
     }
 
-    public List<Object> getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Object> genres) {
+    public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
 
@@ -60,11 +65,19 @@ public class LatestDto {
         this.title = title;
     }
 
-    public Boolean getVideo() {
-        return video;
+    public Videos getVideos() {
+        return videos;
     }
 
-    public void setVideo(Boolean video) {
-        this.video = video;
+    public void setVideos(Videos videos) {
+        this.videos = videos;
+    }
+
+    public Credits getCredits() {
+        return credits;
+    }
+
+    public void setCredits(Credits credits) {
+        this.credits = credits;
     }
 }

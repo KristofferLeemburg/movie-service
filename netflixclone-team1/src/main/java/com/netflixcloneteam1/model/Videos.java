@@ -1,5 +1,7 @@
 
-package com.netflixcloneteam1;
+package com.netflixcloneteam1.model;
+
+import com.netflixcloneteam1.model.Result;
 
 import java.io.Serializable;
 import java.util.List;

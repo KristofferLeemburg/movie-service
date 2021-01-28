@@ -1,5 +1,6 @@
-package com.netflixcloneteam1;
+package com.netflixcloneteam1.feignclient;
 
+import com.netflixcloneteam1.model.Logo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
