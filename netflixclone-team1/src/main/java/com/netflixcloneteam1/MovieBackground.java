@@ -2,7 +2,7 @@
 package com.netflixcloneteam1;
 
 
-public class Hdmovielogo {
+public class MovieBackground {
 
     private String id;
     private String url;

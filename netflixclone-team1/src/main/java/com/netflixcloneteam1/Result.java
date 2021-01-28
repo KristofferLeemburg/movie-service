@@ -5,7 +5,6 @@ import java.io.Serializable;
 
 public class Result implements Serializable
 {
-
     private String id;
     private String iso6391;
     private String iso31661;
@@ -79,5 +78,4 @@ public class Result implements Serializable
     public void setType(String type) {
         this.type = type;
     }
-
 }

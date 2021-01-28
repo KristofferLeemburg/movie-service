@@ -6,11 +6,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients
 @SpringBootApplication
-public class NetflixcloneTeam1 {
-
+public class NetflixCloneTeam1 {
 	public static void main(String[] args) {
-		SpringApplication.run(NetflixcloneTeam1.class, args);
+		SpringApplication.run(NetflixCloneTeam1.class, args);
 	}
-
-
 }

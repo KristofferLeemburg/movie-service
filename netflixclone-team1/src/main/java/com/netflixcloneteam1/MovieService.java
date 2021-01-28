@@ -8,7 +8,7 @@ public class MovieService {
     @Autowired
     private TMDB_API tmdb_api;
     public MovieDetailView retrieveMovieDetails() {
-      Moviedetails moviedetails = tmdb_api.getDetails();
+      MovieDetails moviedetails = tmdb_api.getDetails();
       // filteren op job:director
         MovieDetailView movieDetailView = new MovieDetailView();
         // Director informatie in de View zetten

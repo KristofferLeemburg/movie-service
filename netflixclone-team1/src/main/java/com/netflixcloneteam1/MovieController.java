@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-public class Controller {
-
+public class MovieController {
 
 @Autowired
 private MovieService movieService;
@@ -17,6 +16,11 @@ private MovieService movieService;
 //       return tmdb_api.getLatest();
 //    }
 
+//    @GetMapping("/movies/trailer")
+//    public MovieTrailer getMovieTrailer() {
+//        return tmdb_api.getVideo();
+//    }
+    
     @GetMapping("/movies/details")
     public MovieDetailView getDetails() {
         return movieService.retrieveMovieDetails();
