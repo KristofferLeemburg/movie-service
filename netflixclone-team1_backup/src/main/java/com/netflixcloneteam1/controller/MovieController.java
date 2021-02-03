@@ -5,6 +5,7 @@ import com.netflixcloneteam1.api.TMDB_API;
 import com.netflixcloneteam1.dto.*;
 import com.netflixcloneteam1.service.MovieService;
 import com.netflixcloneteam1.view.LogoView;
+import com.netflixcloneteam1.view.MovieDetailsView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +18,10 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-public class Controller {
+public class MovieController {
+
+    @Autowired
+    private MovieService movieService;
 
     @Value("${tmdb.api_key}")
     private String api_key;
@@ -26,8 +30,6 @@ public class Controller {
     private String api_keyFA;
 
     // Injecting Interface Feign Classes
-    @Autowired
-    private MovieService movieService;
 
     @Autowired
     private TMDB_API tmdb_api;

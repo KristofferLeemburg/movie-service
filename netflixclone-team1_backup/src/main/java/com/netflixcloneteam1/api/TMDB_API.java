@@ -3,6 +3,7 @@ package com.netflixcloneteam1.api;
 import com.netflixcloneteam1.dto.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 // Opdracht van Kim Sing: meer dingen variabel maken, zoals movie_id, api key
@@ -10,12 +11,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(url = "https://api.themoviedb.org/3/", name = "tmdb-api")
 public interface TMDB_API {
+
+ @GetMapping("movie/{id}")
+ public MovieDetails getMovieDetails(@PathVariable int id,
+                                @RequestParam(value = "api_key") String apiKey,
+                                @RequestParam(value = "language") String language,
+                                @RequestParam(value = "append_to_response") String videosAndCredits);
+ // https://api.themoviedb.org/3/movie/475557?api_key=33ea3e5328d23c13d33ed05add4783b7&append_to_response=credits
+//    @GetMapping("movie/475557?api_key=3754c9307adf71f6f0b05eba28de0b3c&append_to_response=credits")
+//    MovieDetails getDetails();
+
    // https://api.themoviedb.org/3/movie/latest?api_key=3754c9307adf71f6f0b05eba28de0b3c
     @GetMapping("movie/latest?api_key=3754c9307adf71f6f0b05eba28de0b3c")
     Latest getLatest();
-   // https://api.themoviedb.org/3/movie/475557?api_key=33ea3e5328d23c13d33ed05add4783b7&append_to_response=credits
-    @GetMapping("movie/475557?api_key=3754c9307adf71f6f0b05eba28de0b3c&append_to_response=credits")
-    MovieDetails getDetails();
+
     // https://api.themoviedb.org/3/movie/475557/videos?api_key=3754c9307adf71f6f0b05eba28de0b3c
     @GetMapping("movie/475557/videos?api_key=3754c9307adf71f6f0b05eba28de0b3c")
     MovieTrailer getVideo();
