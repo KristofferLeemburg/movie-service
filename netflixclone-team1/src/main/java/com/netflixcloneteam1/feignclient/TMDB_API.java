@@ -12,9 +12,13 @@ public interface TMDB_API {
     @GetMapping("movie/latest?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US")
     Latest getLatest();
 
+    // /discover/movie + “with_credits”
+
    // https://api.themoviedb.org/3/movie/406?api_key=33ea3e5328d23c13d33ed05add4783b7&append_to_response=credits,videos
     @GetMapping("movie/406?api_key=33ea3e5328d23c13d33ed05add4783b7&append_to_response=credits")
     MovieDetails getDetails();
+
+    // movie trailer (youtube key)
 
     // https://api.themoviedb.org/3/movie/475557/videos?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US
     @GetMapping("movie/475557/videos?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US")
