@@ -1,10 +1,6 @@
 package com.netflixcloneteam1.api;
 
-import com.netflixcloneteam1.dto.Latest;
-import com.netflixcloneteam1.dto.MovieDetails;
-import com.netflixcloneteam1.dto.MovieGenre;
-import com.netflixcloneteam1.dto.MovieTrailer;
-import com.netflixcloneteam1.dto.MovieDiscover;
+import com.netflixcloneteam1.dto.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
