@@ -1,5 +1,5 @@
 
-package com.netflixcloneteam1;
+package com.netflixcloneteam1.dto;
 
 import java.util.List;
 

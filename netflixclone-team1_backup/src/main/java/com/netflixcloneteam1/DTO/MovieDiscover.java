@@ -1,8 +1,5 @@
 
-package com.netflixcloneteam1;
-import com.netflixcloneteam1.DTO.Credits;
-import com.netflixcloneteam1.DTO.Videos;
-import com.netflixcloneteam1.Result;
+package com.netflixcloneteam1.dto;
 import java.util.List;
 
 public class MovieDiscover {

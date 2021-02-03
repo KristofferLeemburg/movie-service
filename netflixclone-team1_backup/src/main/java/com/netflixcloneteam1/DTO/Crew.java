@@ -1,5 +1,5 @@
 
-package com.netflixcloneteam1.DTO;
+package com.netflixcloneteam1.dto;
 
 import java.io.Serializable;
 
@@ -17,7 +17,7 @@ public class Crew implements Serializable
 //    private String creditId;
 //    private String department;
     private String job;
-    private final static long serialVersionUID = 7882275310212852573L;
+//    private final static long serialVersionUID = 7882275310212852573L;
 
 //    public Boolean getAdult() {
 //        return adult;

@@ -1,5 +1,5 @@
 
-package com.netflixcloneteam1.DTO;
+package com.netflixcloneteam1.dto;
 
 import java.io.Serializable;
 

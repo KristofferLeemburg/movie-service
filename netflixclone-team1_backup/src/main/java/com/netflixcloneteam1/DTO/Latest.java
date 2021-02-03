@@ -1,7 +1,5 @@
 
-package com.netflixcloneteam1.DTO;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.netflixcloneteam1.dto;
 
 import java.util.List;
 

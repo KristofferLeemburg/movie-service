@@ -1,10 +1,7 @@
 
-package com.netflixcloneteam1.DTO;
+package com.netflixcloneteam1.dto;
 
 // import com.fasterxml.jackson.annotation.JsonProperty;
-
-import com.netflixcloneteam1.DTO.Credits;
-import com.netflixcloneteam1.DTO.Genre;
 
 import java.io.Serializable;
 import java.util.List;

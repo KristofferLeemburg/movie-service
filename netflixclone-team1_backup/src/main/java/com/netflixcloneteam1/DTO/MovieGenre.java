@@ -1,7 +1,6 @@
 
-package com.netflixcloneteam1.DTO;
+package com.netflixcloneteam1.dto;
 
-import com.netflixcloneteam1.Result;
 import java.util.List;
 
 public class MovieGenre {

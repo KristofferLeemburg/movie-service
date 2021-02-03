@@ -1,10 +1,8 @@
 package com.netflixcloneteam1.controller;
 
-import com.netflixcloneteam1.APIs.FanArt_API;
-import com.netflixcloneteam1.APIs.TMDB_API;
-import com.netflixcloneteam1.DTO.*;
-import com.netflixcloneteam1.MovieDiscover;
-import com.netflixcloneteam1.Result;
+import com.netflixcloneteam1.api.FanArt_API;
+import com.netflixcloneteam1.api.TMDB_API;
+import com.netflixcloneteam1.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
