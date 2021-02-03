@@ -3,9 +3,13 @@ package com.netflixcloneteam1.controller;
 import com.netflixcloneteam1.api.FanArt_API;
 import com.netflixcloneteam1.api.TMDB_API;
 import com.netflixcloneteam1.dto.*;
+import com.netflixcloneteam1.service.MovieService;
+import com.netflixcloneteam1.view.LogoView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -15,8 +19,25 @@ import java.util.List;
 @RestController
 public class Controller {
 
+    @Value("${tmdb.api_key}")
+    private String api_key;
+
+    @Value("${fnrt.api_key}")
+    private String api_keyFA;
+
+    // Injecting Interface Feign Classes
+    @Autowired
+    private MovieService movieService;
+
     @Autowired
     private TMDB_API tmdb_api;
+    // bij Elmer: MovieDbApi movieDbApi
+
+    @Autowired
+    private FanArt_API fanArt_api;
+    // bij Elmer: FanArtApi fanArtApi
+
+    // Fetches:
 
     // Opdracht van Kim Sing: maak 1 endpoint: /movies/discover en laat frontend bepalen of ie disney of johnnydepp
     // of etc wil fetchen vanuit movies
@@ -26,9 +47,11 @@ public class Controller {
        return tmdb_api.getLatest();
     }
 
-    @GetMapping("/movies/details")
-    public MovieDetails getMovieDetails() {
-        return tmdb_api.getDetails();
+    //Single movie detail request
+    @GetMapping("/movies/details/{id}")
+    public MovieDetailsView getMovieDetails(@PathVariable int id) {
+    return movieService.getMovieDetails(id);
+//        return tmdb_api.getDetails();
     }
 
     @GetMapping("/movies/trailer")
@@ -166,21 +189,19 @@ public class Controller {
         return movies;
     }
 
-    @GetMapping("/movies/discover/charlottegainsbourgh")
-    public List<Result> getCharlotteGainbourgh()
-    {
-        MovieDiscover movieDiscover = tmdb_api.getCharlotteGainbourgh(1);
-        MovieDiscover nextMovieDiscover = tmdb_api.getCharlotteGainbourgh(movieDiscover.getPage()+1);
-        List<Result> movies = new ArrayList<Result>(movieDiscover.getResults());
-        movies.addAll(nextMovieDiscover.getResults());
-        return movies;
-    }
+//    @GetMapping("/movies/discover/charlottegainsbourgh")
+//    public List<Result> getCharlotteGainbourgh()
+//    {
+//        MovieDiscover movieDiscover = tmdb_api.getCharlotteGainbourgh(1);
+//        MovieDiscover nextMovieDiscover = tmdb_api.getCharlotteGainbourgh(movieDiscover.getPage()+1);
+//        List<Result> movies = new ArrayList<Result>(movieDiscover.getResults());
+//        movies.addAll(nextMovieDiscover.getResults());
+//        return movies;
+//    }
 
-    @Autowired
-    private FanArt_API fanArt_api;
-
-    @GetMapping("/movies/logo")
-    public Logo getLogo() {
-        return fanArt_api.getLogo();
+    @GetMapping("/movies/logos/{id}")
+    public LogoView getLogo(@PathVariable int id) {
+//        return fanArt_api.getLogo();
+        return movieService.getLogo(id);
     }
 }
