@@ -8,7 +8,7 @@ public class MovieTrailer implements Serializable
 
     private Integer id;
     private List<Result> results = null;
-//    private final static long serialVersionUID = 7439210477757914778L;
+    private final static long serialVersionUID = 7439210477757914778L;
 
     public Integer getId() {
         return id;
