@@ -7,7 +7,7 @@ public class Genre implements Serializable
 {
     private Integer id;
     private String name;
-    private final static long serialVersionUID = 3375529569450378574L;
+//    private final static long serialVersionUID = 3375529569450378574L;
 
     public Integer getId() {
         return id;

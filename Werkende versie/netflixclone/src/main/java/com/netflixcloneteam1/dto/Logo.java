@@ -6,7 +6,7 @@ import java.util.List;
 public class Logo {
 
     private String name;
-    private List<HdMovieLogo> hdmovielogo = null;
+    private List<HdMovieLogo> hdMovieLogo = null;
 //    private String tmdbId;
 //    private String imdbId;
 //    private List<Hdmovieclearart> hdmovieclearart = null;
@@ -26,11 +26,11 @@ public class Logo {
         this.name = name;
     }
 
-    public List<HdMovieLogo> getHdmovielogo() {
-        return hdmovielogo;
+    public List<HdMovieLogo> getHdMovieLogo() {
+        return hdMovieLogo;
     }
 
-    public void setHdmovielogo(List<HdMovieLogo> hdmovielogo) {
-        this.hdmovielogo = hdmovielogo;
+    public void setHdMovieLogo(List<HdMovieLogo> hdMovieLogo) {
+        this.hdMovieLogo = hdMovieLogo;
     }
 }
