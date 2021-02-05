@@ -3,9 +3,12 @@ package com.netflixcloneteam1.controller;
 import com.netflixcloneteam1.api.FanArt_API;
 import com.netflixcloneteam1.api.TMDB_API;
 import com.netflixcloneteam1.dto.*;
+import com.netflixcloneteam1.dto.movieImagesFA.MovieImagesFA;
+import com.netflixcloneteam1.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -14,8 +17,16 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:3000" , "http://localhost:3000/film"})
 @RestController
 public class Controller {
+
+    @Autowired
+    private MovieService movieService;
+
     @Autowired
     private TMDB_API tmdb_api;
+
+    @Autowired
+    private FanArt_API fanArt_api;
+
 
     // Opdracht van Kim Sing: maak 1 endpoint: /movies/discover en laat frontend bepalen of ie disney of johnnydepp
     // of etc wil fetchen vanuit movies
@@ -175,11 +186,15 @@ public class Controller {
         return movies;
     }
 
-    @Autowired
-    private FanArt_API fanArt_api;
-
     @GetMapping("/movies/logo")
     public Logo getLogo() {
         return fanArt_api.getLogo();
+    }
+
+    // Get images from FanArt
+    @GetMapping("/movie/images/{id}")
+    public MovieImagesFA getMovieImages(@PathVariable int id){
+        System.out.println(" ---> Movie images requested from frontend");
+        return movieService.getMovieImages(id);
     }
 }
