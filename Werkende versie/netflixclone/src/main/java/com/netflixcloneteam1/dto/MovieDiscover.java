@@ -8,6 +8,7 @@ public class MovieDiscover {
     private List<Result> results = null;
     private Integer totalPages;
     private Integer totalResults;
+    private Credits credits;
 
     public Integer getPage() {
         return page;
@@ -40,4 +41,8 @@ public class MovieDiscover {
     public void setTotalResults(Integer totalResults) {
         this.totalResults = totalResults;
     }
+
+    public Credits getCredits() {return credits; }
+
+    public void setCredits (Credits credits) {this.credits = credits; }
 }
