@@ -3,6 +3,7 @@ package com.netflixcloneteam1.controller;
 import com.netflixcloneteam1.api.FanArt_API;
 import com.netflixcloneteam1.api.TMDB_API;
 import com.netflixcloneteam1.dto.*;
+import com.netflixcloneteam1.dto.movieImagesFA.Logo;
 import com.netflixcloneteam1.dto.movieImagesFA.MovieImagesFA;
 import com.netflixcloneteam1.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,6 @@ public class Controller {
        return tmdb_api.getLatest();
     }
 
-    @GetMapping("/movies/details")
-    public MovieDetails getMovieDetails() {
-        return tmdb_api.getDetails();
-    }
 
     @GetMapping("/movies/trailer")
     public MovieTrailer getMovieTrailer() {
@@ -186,15 +183,26 @@ public class Controller {
         return movies;
     }
 
-    @GetMapping("/movies/logo")
-    public Logo getLogo() {
-        return fanArt_api.getLogo();
+
+    // movie details based on movie id
+    @GetMapping("/movies/details/{id}")
+    public MovieDetails getMovieDetails(@PathVariable int id) {
+        System.out.println(" ---> Movie details request with movie id: " + id);
+        return movieService.getDetails(id);
+    }
+
+
+    // get logos from fanart
+    @GetMapping("/movies/logos/{id}")
+    public Logo getLogo(@PathVariable int id) {
+        System.out.println(" ---> Logo request from frontend");
+        return movieService.getLogo(id);
     }
 
     // Get images from FanArt
-    @GetMapping("/movie/images/{id}")
+    @GetMapping("/movies/images/{id}")
     public MovieImagesFA getMovieImages(@PathVariable int id){
-        System.out.println(" ---> Movie images requested from frontend");
+        System.out.println(" ---> Movie images request from frontend");
         return movieService.getMovieImages(id);
     }
 }

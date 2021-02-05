@@ -2,6 +2,8 @@ package com.netflixcloneteam1.service;
 
 import com.netflixcloneteam1.api.FanArt_API;
 import com.netflixcloneteam1.api.TMDB_API;
+import com.netflixcloneteam1.dto.MovieDetails;
+import com.netflixcloneteam1.dto.movieImagesFA.Logo;
 import com.netflixcloneteam1.dto.movieImagesFA.MovieImagesFA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,4 +37,14 @@ public class MovieService {
         return fanArtApi.getMovieImages(id, api_keyFA);
     }
 
+    public Logo getLogo(int id) {
+        return fanArtApi.getLogo(id, api_keyFA);
+    }
+
+    public MovieDetails getDetails(int id) {
+
+        // here we should apply some filtering and choose what to return
+
+        return movieDbApi.getMovieDetails(id, api_keyMD, lang, include_video, append_to_response);
+    }
 }

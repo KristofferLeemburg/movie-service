@@ -1,26 +1,24 @@
 
 package com.netflixcloneteam1.dto;
 
-// import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class MovieDetails implements Serializable
 {
-//    @JsonProperty("backdrop_path")
+
     private String backdropPath;
     private List<Genre> genres = null;
+
+    // credits is getting the full cast and crew
+    private Credits credits;
+
     private Integer id;
     private String overview;
     private Integer runtime;
     private String title;
-//    private Object belongsToCollection;
-//    private String homepage;
-//    private String releaseDate;
-//    private Videos videos;
-//    private Credits credits;
-//    private final static long serialVersionUID = 1303507716553349424L;
+
 
     public String getBackdropPath() {
         return backdropPath;
@@ -37,6 +35,12 @@ public class MovieDetails implements Serializable
     public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
+
+
+    public Credits getCredits() { return credits; }
+
+    public void setCredits(Credits credits) { this.credits = credits; }
+
 
     public Integer getId() {
         return id;
