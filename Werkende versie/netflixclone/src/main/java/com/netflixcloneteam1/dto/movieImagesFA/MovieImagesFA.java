@@ -4,21 +4,20 @@ import java.util.List;
 
 public class MovieImagesFA {
 
-
-
     private String name;
     private String tmdbId;
     private String imdbId;
+    private String status;
     private List<Movieposter> movieposter;
     private List<Hdmovielogo> hdmovielogo;
+    private List<Movielogo> movielogo;
     private List<Moviedisc> moviedisc;
     private List<Moviethumb> moviethumb;
     private List<Hdmovieclearart> hdmovieclearart;
     private List<Moviebackground> moviebackground;
     private List<Moviebanner> moviebanner;
-    private List<Movielogo> movielogo;
     private List<Movieart> movieart;
-    private String status;
+
 
     public String getName() {
         return name;
@@ -52,13 +51,6 @@ public class MovieImagesFA {
         this.movieposter = movieposter;
     }
 
-    public List<Hdmovielogo> getHdmovielogo() {
-        return hdmovielogo;
-    }
-
-    public void setHdmovielogo(List<Hdmovielogo> hdmovielogo) {
-        this.hdmovielogo = hdmovielogo;
-    }
 
     public List<Moviedisc> getMoviedisc() {
         return moviedisc;
@@ -100,13 +92,18 @@ public class MovieImagesFA {
         this.moviebanner = moviebanner;
     }
 
-    public List<Movielogo> getMovielogo() {
-        return movielogo;
-    }
+    public List<Movielogo> getMovielogo() { return movielogo; }
 
     public void setMovielogo(List<Movielogo> movielogo) {
         this.movielogo = movielogo;
     }
+
+    public List<Hdmovielogo> getHdmovielogo() { return hdmovielogo; }
+
+    public void setHdmovielogo(List<Hdmovielogo> hdmovielogo) {
+        this.hdmovielogo = hdmovielogo;
+    }
+
 
     public List<Movieart> getMovieart() {
         return movieart;

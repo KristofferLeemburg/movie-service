@@ -1,6 +1,5 @@
 package com.netflixcloneteam1.api;
 
-import com.netflixcloneteam1.dto.movieImagesFA.Logo;
 import com.netflixcloneteam1.dto.movieImagesFA.MovieImagesFA;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +17,4 @@ public interface FanArt_API {
                                  @RequestParam(value="api_key") String api_key
     );
 
-    // get only hd logos
-    @GetMapping("movies/{id}")
-    Logo getLogo(@PathVariable("id") int movieId,
-                 @RequestParam(value="api_key") String api_key
-    );
 }

@@ -1,6 +1,8 @@
 package com.netflixcloneteam1.api;
 
 import com.netflixcloneteam1.dto.*;
+import com.netflixcloneteam1.dto.movieTrailer.MovieTrailer;
+import com.netflixcloneteam1.dto.moviesByGenres.MoviesByGenre;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +20,7 @@ public interface TMDB_API {
    // https://api.themoviedb.org/3/movie/475557?api_key=33ea3e5328d23c13d33ed05add4783b7&append_to_response=credits
 
 
-
-   // get movie details based on id
+    // get movie details based on id
     @GetMapping("movie/{movieId}")
     MovieDetails getMovieDetails(@PathVariable("movieId") int movieId,
                               @RequestParam(value="api_key") String api_key,
@@ -27,6 +28,18 @@ public interface TMDB_API {
                               @RequestParam(value="video") String inclVideo,
                               @RequestParam(value="append_to_response") String credits
     );
+
+    // get list of movies based on genre id
+    @GetMapping("discover/movie")
+    MoviesByGenre getMoviesByGenre(@RequestParam(value="api_key") String api_key,
+                                   @RequestParam(value="with_genres") String genreId);
+
+    // get trailer based on movie id
+    @GetMapping("movie/{movieId}/videos")
+    MovieTrailer getMovieTrailer(@PathVariable("movieId") int movieId,
+                                 @RequestParam(value="api_key") String api_key,
+                                 @RequestParam(value="language") String language);
+
 
 
     // https://api.themoviedb.org/3/movie/475557/videos?api_key=3754c9307adf71f6f0b05eba28de0b3c
