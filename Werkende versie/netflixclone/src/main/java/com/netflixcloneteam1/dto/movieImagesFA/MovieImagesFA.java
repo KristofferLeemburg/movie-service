@@ -9,8 +9,10 @@ public class MovieImagesFA {
     private String imdbId;
     private String status;
     private List<Movieposter> movieposter;
+
     private List<Hdmovielogo> hdmovielogo;
     private List<Movielogo> movielogo;
+
     private List<Moviedisc> moviedisc;
     private List<Moviethumb> moviethumb;
     private List<Hdmovieclearart> hdmovieclearart;

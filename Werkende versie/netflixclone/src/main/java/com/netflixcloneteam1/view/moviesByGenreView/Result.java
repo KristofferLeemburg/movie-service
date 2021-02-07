@@ -14,7 +14,8 @@ public class Result {
     private String releaseDate;
     private String title;
     private String trailer; //added in service class
-    private MovieLogosView movieLogos = null;//
+
+    private MovieLogosView movieLogos = null;
 
 
     public MovieLogosView getMovieLogos() {

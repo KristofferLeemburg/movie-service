@@ -2,10 +2,9 @@ package com.netflixcloneteam1.service;
 
 import com.netflixcloneteam1.api.FanArt_API;
 import com.netflixcloneteam1.api.TMDB_API;
+
 import com.netflixcloneteam1.dto.MovieDetails;
-
 import com.netflixcloneteam1.dto.movieTrailer.MovieTrailer;
-
 import com.netflixcloneteam1.dto.movieImagesFA.MovieImagesFA;
 import com.netflixcloneteam1.dto.moviesByGenres.MoviesByGenre;
 
@@ -63,11 +62,16 @@ public class MovieService {
     // make a list of logos
     public MovieLogosView getMovieLogo(int movieId) {
 
+        // inside MovieImagesFA we have access to all the images
         MovieImagesFA dtoImagesFA = fanArtApi.getMovieImages(movieId, api_keyFA);
 
+        // instantiate the view object, this class holds the MovieLogos list
         MovieLogosView logosView = new MovieLogosView();
         List<MovieLogos> logoList = new ArrayList<>();
+
+        // access the url in MovieLogos
         MovieLogos movielogos = new MovieLogos();
+
 
         if (dtoImagesFA.getMovielogo() != null && dtoImagesFA.getMovielogo().size() != 0 && dtoImagesFA.getMovielogo().get(0).getLang().equals("en")) {
             movielogos.setUrl(dtoImagesFA.getMovielogo().get(0).getUrl());
