@@ -9,7 +9,7 @@ public class Videos implements Serializable
 {
     private Integer id;
     private List<Result> results = null;
-//    private final static long serialVersionUID = -7881277909456503877L;
+    private final static long serialVersionUID = -7881277909456503877L;
 
     public Integer getId() {
         return id;
