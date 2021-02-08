@@ -6,9 +6,17 @@ import java.util.List;
 
 public class Credits implements Serializable
 {
-    private List<Crew> crew = null;
-//    private List<Cast> cast = null;
-//    private final static long serialVersionUID = 1040128773354111160L;
+    public List<Cast> cast = null;
+    public List<Crew> crew = null;
+
+
+    public List<Cast> getCast() {
+        return cast;
+    }
+
+    public void setCast(List<Cast> cast) {
+        this.cast = cast;
+    }
 
     public List<Crew> getCrew() {
         return crew;

@@ -10,7 +10,6 @@ public class Hdmovielogo {
     public String likes;
 
 
-
     public String getId() {
         return id;
     }

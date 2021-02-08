@@ -9,15 +9,16 @@ public class Result {
     private Integer id;
     private String overview;
     private String title;
-//    private Boolean adult;
-//    private String originalLanguage;
-//    private String originalTitle;
-//    private Float popularity;
-//    private String posterPath;
-//    private String releaseDate;
-//    private Boolean video;
-//    private Float voteAverage;
-//    private Integer voteCount;
+
+    private Boolean adult;
+    private String originalLanguage;
+    private String originalTitle;
+    private Float popularity;
+    private String posterPath;
+    private String releaseDate;
+    private Boolean video;
+    private Float voteAverage;
+    private Integer voteCount;
 
     public String getBackdropPath() {
         return backdropPath;

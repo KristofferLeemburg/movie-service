@@ -3,8 +3,12 @@ package com.netflixcloneteam1.controller;
 import com.netflixcloneteam1.api.FanArt_API;
 import com.netflixcloneteam1.api.TMDB_API;
 import com.netflixcloneteam1.dto.*;
+
 import com.netflixcloneteam1.dto.movieImagesFA.MovieImagesFA;
+import com.netflixcloneteam1.dto.movieTrailer.MovieTrailer;
 import com.netflixcloneteam1.service.MovieService;
+
+import com.netflixcloneteam1.view.moviesByGenreView.MoviesByGenreView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,15 +40,19 @@ public class Controller {
        return tmdb_api.getLatest();
     }
 
-    @GetMapping("/movies/details")
-    public MovieDetails getMovieDetails() {
-        return tmdb_api.getDetails();
-    }
 
     @GetMapping("/movies/trailer")
     public MovieTrailer getMovieTrailer() {
         return tmdb_api.getVideo();
     }
+
+    // get movies based on genre id
+    @GetMapping("/movies/genre/{genreId}")
+    public MoviesByGenreView getMoviesByGenre(@PathVariable String genreId){
+        System.out.println(" ---> Movies genre with id:"+ genreId +" requested from frontend");
+        return movieService.getMoviesByGenre(genreId);
+    }
+
 
     @GetMapping("/movies/genre/action")
     public List<Result> getAction()
@@ -186,15 +194,18 @@ public class Controller {
         return movies;
     }
 
-    @GetMapping("/movies/logo")
-    public Logo getLogo() {
-        return fanArt_api.getLogo();
+
+    // movie details based on movie id
+    @GetMapping("/movies/details/{id}")
+    public MovieDetails getMovieDetails(@PathVariable int id) {
+        System.out.println(" ---> Movie details request with movie id: " + id);
+        return movieService.getDetails(id);
     }
 
     // Get images from FanArt
-    @GetMapping("/movie/images/{id}")
+    @GetMapping("/movies/images/{id}")
     public MovieImagesFA getMovieImages(@PathVariable int id){
-        System.out.println(" ---> Movie images requested from frontend");
+        System.out.println(" ---> Movie images request from frontend");
         return movieService.getMovieImages(id);
     }
 }
