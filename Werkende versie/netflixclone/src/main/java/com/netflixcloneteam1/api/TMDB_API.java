@@ -25,48 +25,46 @@ public interface TMDB_API {
     MovieDetails getMovieDetails(@PathVariable("movieId") int movieId,
                               @RequestParam(value="api_key") String api_key,
                               @RequestParam(value="language") String language,
-                              @RequestParam(value="video") String inclVideo,
-                              @RequestParam(value="append_to_response") String credits
-    );
+                              @RequestParam(value="append_to_response") String credits);
+
+ // get trailer based on movie id
+ @GetMapping("movie/{movieId}/videos")
+ MovieTrailer getMovieTrailer(@PathVariable("movieId") int movieId,
+                              @RequestParam(value="api_key") String api_key,
+                              @RequestParam(value="language") String language);
 
     // get list of movies based on genre id
     @GetMapping("discover/movie")
     MoviesByGenre getMoviesByGenre(@RequestParam(value="api_key") String api_key,
-                                   @RequestParam(value="with_genres") String genreId);
+                                   @RequestParam(value="with_genres") String genreId,
+                                   @RequestParam(value="language") String language,
+                                   @RequestParam (value="sort_by") String sort_by,
+                                   @RequestParam int page);
 
-    // get trailer based on movie id
-    @GetMapping("movie/{movieId}/videos")
-    MovieTrailer getMovieTrailer(@PathVariable("movieId") int movieId,
-                                 @RequestParam(value="api_key") String api_key,
-                                 @RequestParam(value="language") String language);
+    // get list of movies based on release date
+//    @GetMapping("discover/movie")
+//    MovieDiscover getMoviesDiscover(@RequestParam(value="api_key") String api_key,
+//                                   // primary_release_date.gte=1980-01-01&primary_release_date.lte=1989-12-31
+//                                   @RequestParam(value="primary_release_date") String release_date,
+//                                   @RequestParam(value="language") String language,
+//                                   @RequestParam (value="sort_by") String sort_by,
+//                                   @RequestParam int page);
 
+ // get list of movies based on actor
+//    @GetMapping("discover/movie")
+//    MovieDiscover getMoviesDiscover(@RequestParam(value="api_key") String api_key,
+//                                   @RequestParam(value="with_people") String actorId,
+//                                   @RequestParam(value="language") String language,
+//                                   @RequestParam (value="sort_by") String sort_by,
+//                                   @RequestParam int page);
 
-
-    // https://api.themoviedb.org/3/movie/475557/videos?api_key=3754c9307adf71f6f0b05eba28de0b3c
-    @GetMapping("movie/475557/videos?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US")
-    MovieTrailer getVideo();
-    // Discover:
-    // https://api.themoviedb.org/3/discover/movie?api_key=33ea3e5328d23c13d33ed05add4783b7&with_genres=28&without_genres=35,53,10751,14,80,12
-    @GetMapping("discover/movie?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US&with_genres=28&without_genres=35,53,10751,14,80,12,878,18&sort_by=vote_count.desc")
-    MovieGenre getAction(@RequestParam int page);
-
-    @GetMapping("discover/movie?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US&with_genres=35&without_genres=28,53,10751,14,80,12&sort_by=vote_count.desc")
-    MovieGenre getComedy(@RequestParam int page);
-
-    @GetMapping("discover/movie?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US&with_genres=53&without_genres=28,35,10751,14,80,12&sort_by=vote_count.desc")
-    MovieGenre getThriller(@RequestParam int page);
-
-    @GetMapping("discover/movie?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US&with_genres=10751&without_genres=35,53,28,14,80,12&sort_by=vote_count.desc")
-    MovieGenre getFamily(@RequestParam int page);
-
-    @GetMapping("discover/movie?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US&with_genres=14&without_genres=35,53,10751,28,80,12&sort_by=vote_count.desc")
-    MovieGenre getFantasy(@RequestParam int page);
-
-    @GetMapping("discover/movie?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US&with_genres=80&without_genres=35,53,10751,28,14,12&sort_by=vote_count.desc")
-    MovieGenre getCrime(@RequestParam int page);
-
-    @GetMapping("discover/movie?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US&with_genres=12&without_genres=35,53,10751,28,80,14&sort_by=vote_count.desc")
-    MovieGenre getAdventure(@RequestParam int page);
+ // get list of movies based on Production House (e.g. Disney (companyId = 2)
+//    @GetMapping("discover/movie")
+//    MovieDiscover getMoviesDiscover(@RequestParam(value="api_key") String api_key,
+//                                   @RequestParam(value="with_companies") String companyId,
+//                                   @RequestParam(value="language") String language,
+//                                   @RequestParam (value="sort_by") String sort_by,
+//                                   @RequestParam int page);
 
     // https://api.themoviedb.org/3/discover/movie?api_key=3754c9307adf71f6f0b05eba28de0b3c&primary_release_date.gte=1980-01-01&primary_release_date.lte=1989-12-31
     @GetMapping("discover/movie?api_key=3754c9307adf71f6f0b05eba28de0b3c&language=en-US&primary_release_date.gte=1980-01-01&primary_release_date.lte=1989-12-31&sort_by=vote_count.desc")
@@ -90,8 +88,6 @@ public interface TMDB_API {
 
     @GetMapping("discover/movie?api_key=3754c9307adf71f6f0b05eba28de0b3c&with_people=4273&sort_by=vote_count.desc&language=en-US")
     MovieDiscover getCharlotteGainbourgh(@RequestParam int page);
-
-
 }
 
 

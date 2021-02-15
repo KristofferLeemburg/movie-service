@@ -5,7 +5,6 @@ import com.netflixcloneteam1.api.TMDB_API;
 import com.netflixcloneteam1.dto.*;
 
 import com.netflixcloneteam1.dto.movieImagesFA.MovieImagesFA;
-import com.netflixcloneteam1.dto.movieTrailer.MovieTrailer;
 import com.netflixcloneteam1.service.MovieService;
 
 import com.netflixcloneteam1.view.moviesByGenreView.MoviesByGenreView;
@@ -31,97 +30,36 @@ public class Controller {
     @Autowired
     private FanArt_API fanArt_api;
 
-
-    // Opdracht van Kim Sing: maak 1 endpoint: /movies/discover en laat frontend bepalen of ie disney of johnnydepp
-    // of etc wil fetchen vanuit movies
-
     @GetMapping("/movies/latest")
     public Latest getLatest() {
        return tmdb_api.getLatest();
     }
 
-
-    @GetMapping("/movies/trailer")
-    public MovieTrailer getMovieTrailer() {
-        return tmdb_api.getVideo();
+    // Get images from FanArt
+    @GetMapping("/movies/images/{id}")
+    public MovieImagesFA getMovieImages(@PathVariable int id){
+        System.out.println(" ---> Movie images request from frontend");
+        return movieService.getMovieImages(id);
     }
+
+    @GetMapping("/movies/trailer/{id}")
+    public String getMovieTrailer(@PathVariable int id) {
+        System.out.println(" ---> Movie trailer request with movie id: " + id);
+        return movieService.getMovieTrailer(id);
+    }
+
+//     movie details based on movie id
+//    @GetMapping("/movies/details/{id}")
+//    public MovieDetailsView getMovieDetails(@PathVariable int id) {
+//        System.out.println(" ---> Movie details request with movie id: " + id);
+//        return movieService.getDetails(id);
+//    }
 
     // get movies based on genre id
     @GetMapping("/movies/genre/{genreId}")
     public MoviesByGenreView getMoviesByGenre(@PathVariable String genreId){
         System.out.println(" ---> Movies genre with id:"+ genreId +" requested from frontend");
         return movieService.getMoviesByGenre(genreId);
-    }
-
-
-    @GetMapping("/movies/genre/action")
-    public List<Result> getAction()
-    {
-        MovieGenre movieGenre = tmdb_api.getAction(1);
-        MovieGenre nextMovieGenre = tmdb_api.getAction(movieGenre.getPage()+1);
-        List<Result> movies = new ArrayList<Result>(movieGenre.getResults());
-        movies.addAll(nextMovieGenre.getResults());
-        return movies;
-    }
-
-    @GetMapping("/movies/genre/comedy")
-    public List<Result> getComedy()
-    {
-        MovieGenre movieGenre = tmdb_api.getComedy(1);
-        MovieGenre nextMovieGenre = tmdb_api.getComedy(movieGenre.getPage()+1);
-        List<Result> movies = new ArrayList<Result>(movieGenre.getResults());
-        movies.addAll(nextMovieGenre.getResults());
-        return movies;
-    }
-
-    @GetMapping("/movies/genre/thriller")
-    public List<Result> getThriller()
-    {
-        MovieGenre movieGenre = tmdb_api.getThriller(1);
-        MovieGenre nextMovieGenre = tmdb_api.getThriller(movieGenre.getPage()+1);
-        List<Result> movies = new ArrayList<Result>(movieGenre.getResults());
-        movies.addAll(nextMovieGenre.getResults());
-        return movies;
-    }
-
-    @GetMapping("/movies/genre/family")
-    public List<Result> getFamily()
-    {
-        MovieGenre movieGenre = tmdb_api.getFamily(1);
-        MovieGenre nextMovieGenre = tmdb_api.getFamily(movieGenre.getPage()+1);
-        List<Result> movies = new ArrayList<Result>(movieGenre.getResults());
-        movies.addAll(nextMovieGenre.getResults());
-        return movies;
-    }
-
-    @GetMapping("/movies/genre/fantasy")
-    public List<Result> getFantasy()
-    {
-        MovieGenre movieGenre = tmdb_api.getFantasy(1);
-        MovieGenre nextMovieGenre = tmdb_api.getFantasy(movieGenre.getPage()+1);
-        List<Result> movies = new ArrayList<Result>(movieGenre.getResults());
-        movies.addAll(nextMovieGenre.getResults());
-        return movies;
-    }
-
-    @GetMapping("/movies/genre/crime")
-    public List<Result> getCrime()
-    {
-        MovieGenre movieGenre = tmdb_api.getCrime(1);
-        MovieGenre nextMovieGenre = tmdb_api.getCrime(movieGenre.getPage()+1);
-        List<Result> movies = new ArrayList<Result>(movieGenre.getResults());
-        movies.addAll(nextMovieGenre.getResults());
-        return movies;
-    }
-
-    @GetMapping("/movies/genre/adventure")
-    public List<Result> getAdventure()
-    {
-        MovieGenre movieGenre = tmdb_api.getAdventure(1);
-        MovieGenre nextMovieGenre = tmdb_api.getAdventure(movieGenre.getPage()+1);
-        List<Result> movies = new ArrayList<Result>(movieGenre.getResults());
-        movies.addAll(nextMovieGenre.getResults());
-        return movies;
     }
 
     @GetMapping("/movies/discover/80s")
@@ -192,20 +130,5 @@ public class Controller {
         List<Result> movies = new ArrayList<Result>(movieDiscover.getResults());
         movies.addAll(nextMovieDiscover.getResults());
         return movies;
-    }
-
-
-    // movie details based on movie id
-    @GetMapping("/movies/details/{id}")
-    public MovieDetails getMovieDetails(@PathVariable int id) {
-        System.out.println(" ---> Movie details request with movie id: " + id);
-        return movieService.getDetails(id);
-    }
-
-    // Get images from FanArt
-    @GetMapping("/movies/images/{id}")
-    public MovieImagesFA getMovieImages(@PathVariable int id){
-        System.out.println(" ---> Movie images request from frontend");
-        return movieService.getMovieImages(id);
     }
 }

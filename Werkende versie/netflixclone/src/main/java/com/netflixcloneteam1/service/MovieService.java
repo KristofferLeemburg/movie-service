@@ -8,6 +8,7 @@ import com.netflixcloneteam1.dto.movieTrailer.MovieTrailer;
 import com.netflixcloneteam1.dto.movieImagesFA.MovieImagesFA;
 import com.netflixcloneteam1.dto.moviesByGenres.MoviesByGenre;
 
+import com.netflixcloneteam1.view.movieDetails.MovieDetailsView;
 import com.netflixcloneteam1.view.movieImagesFaView.MovieLogos;
 import com.netflixcloneteam1.view.movieImagesFaView.MovieLogosView;
 import com.netflixcloneteam1.view.movieTrailerView.MovieTrailerView;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Service
 public class MovieService {
 
@@ -29,7 +29,6 @@ public class MovieService {
     private final String include_adult = "false";
     private final String with_original_language = "en";
     private final String include_video = "true";
-    private final String append_to_response = "credits";
 
     @Value("${tmdb.api_key}")
     private String api_keyMD;
@@ -37,13 +36,11 @@ public class MovieService {
     @Value("${fnrt.api_key}")
     private String api_keyFA;
 
-
     @Autowired
     private TMDB_API movieDbApi;
 
     @Autowired
     private FanArt_API fanArtApi;
-
 
     // get images
     public MovieImagesFA getMovieImages(int id) {
@@ -51,14 +48,31 @@ public class MovieService {
         return fanArtApi.getMovieImages(id, api_keyFA);
     }
 
+//    // get movie details
+    public MovieDetailsView getDetails(int id) {
+//        // here we should apply some filtering and choose what to return
+        String append_to_response = "credits";
+        MovieDetails movieDetailsDTO = movieDbApi.getMovieDetails(id, api_keyMD, lang, append_to_response);
 
-    // get movie details
-    public MovieDetails getDetails(int id) {
+        MovieDetailsView movieDetailsView = new MovieDetailsView();
+        movieDetailsView.setBackdropPath(movieDetailsDTO.getBackdropPath());
+        movieDetailsView.setGenres(movieDetailsDTO.getGenres());
 
-        // here we should apply some filtering and choose what to return
-        return movieDbApi.getMovieDetails(id, api_keyMD, lang, include_video, append_to_response);
+        for (int i = 0; i<movieDetailsDTO.getCredits().getCrew().size(); i++) {
+            String job = movieDetailsDTO.getCredits().getCrew().get(i).getJob();
+          if (job.equals("Director")) {movieDetailsView.setDirector(movieDetailsDTO.getCredits().getCrew().get(i).getName());}
+        }
+
+        movieDetailsView.setId(movieDetailsDTO.getId());
+        movieDetailsView.setOverview(movieDetailsDTO.getOverview());
+        movieDetailsView.setRuntime(movieDetailsDTO.getRuntime());
+        movieDetailsView.setTitle(movieDetailsDTO.getTitle());
+
+//        int movieId = movieDetailsDTO.getId();
+//        MovieDetailsView.setTrailer(getMovieTrailer(movieId));
+
+        return movieDetailsView;
     }
-
     // make a list of logos
     public MovieLogosView getMovieLogo(int movieId) {
 
@@ -71,14 +85,11 @@ public class MovieService {
 
         // access the url in MovieLogos
         MovieLogos movielogos = new MovieLogos();
-
-
         if (dtoImagesFA.getMovielogo() != null && dtoImagesFA.getMovielogo().size() != 0 && dtoImagesFA.getMovielogo().get(0).getLang().equals("en")) {
             movielogos.setUrl(dtoImagesFA.getMovielogo().get(0).getUrl());
         } else {
             movielogos.setUrl("no (English) logo available");
         }
-
 
         if (dtoImagesFA.getHdmovielogo() != null && dtoImagesFA.getHdmovielogo().size() != 0 && dtoImagesFA.getHdmovielogo().get(0).getLang().equals("en")) {
                 movielogos.setUrlHd(dtoImagesFA.getHdmovielogo().get(0).getUrl());
@@ -92,19 +103,17 @@ public class MovieService {
     }
 
     // get the trailers
-    public String getMovieTrailer(int movieId){
+    public String getMovieTrailer(int id){
 
-        MovieTrailer dtoTrailer = movieDbApi.getMovieTrailer(movieId,api_keyMD,lang);
+        MovieTrailer dtoTrailer = movieDbApi.getMovieTrailer(id,api_keyMD,lang);
         MovieTrailerView trailerView = new MovieTrailerView();
 
         if (dtoTrailer.getResults() == null || dtoTrailer.getResults().size() == 0){
             trailerView.setYoutubeId("not available");
-
         }
         else {
             trailerView.setYoutubeId(dtoTrailer.getResults().get(0).getKey());
         }
-
 
         return trailerView.getYoutubeId();
     }
@@ -113,36 +122,57 @@ public class MovieService {
     public MoviesByGenreView getMoviesByGenre(String genreId) {
 
         // model object
-        MoviesByGenre dtoObject = movieDbApi.getMoviesByGenre(api_keyMD, genreId);
+        String sort_by = "vote_count.desc";
+        MoviesByGenre movieByGenre = movieDbApi.getMoviesByGenre(api_keyMD, genreId, lang, sort_by, 1);
+        MoviesByGenre nextMovieByGenre = movieDbApi.getMoviesByGenre(api_keyMD, genreId, lang, sort_by, 2);
+
         // view object
         MoviesByGenreView viewObject = new MoviesByGenreView();
 
         List<Result> newList = new ArrayList<>();
 
-        viewObject.setPage(dtoObject.getPage());
-        viewObject.setTotalPages(dtoObject.getTotalPages());
-        viewObject.setTotalResults(dtoObject.getTotalResults());
+        viewObject.setPage(movieByGenre.getPage());
+        viewObject.setTotalPages(movieByGenre.getTotalPages());
+        viewObject.setTotalResults(movieByGenre.getTotalResults());
 
-        for (int i = 0; i<dtoObject.getResults().size(); i++) {
+        for (int i = 0; i<movieByGenre.getResults().size(); i++) {
 
             Result result = new Result();
-            result.setId(dtoObject.getResults().get(i).getId());
-            result.setTitle(dtoObject.getResults().get(i).getTitle());
-            result.setOriginalTitle(dtoObject.getResults().get(i).getOriginalTitle());
-            result.setOverview(dtoObject.getResults().get(i).getOverview());
-            result.setReleaseDate(dtoObject.getResults().get(i).getReleaseDate());
-            result.setOriginalLanguage(dtoObject.getResults().get(i).getOriginalLanguage());
-            result.setBackdropPath(dtoObject.getResults().get(i).getBackdropPath());
-            result.setPosterPath(dtoObject.getResults().get(i).getPosterPath());
+            result.setId(movieByGenre.getResults().get(i).getId());
+            result.setTitle(movieByGenre.getResults().get(i).getTitle());
+            result.setOverview(movieByGenre.getResults().get(i).getOverview());
+            result.setBackdropPath(movieByGenre.getResults().get(i).getBackdropPath());
 
-            int movieId = dtoObject.getResults().get(i).getId();
+            int movieId = movieByGenre.getResults().get(i).getId();
 
-            //add trailer and logo
+            //add trailer, logo, runtime, Director, genres
             result.setTrailer(getMovieTrailer(movieId));
             result.setMovieLogos(getMovieLogo(movieId));
-
+            result.setRuntime(getDetails(movieId).getRuntime());
+            result.setDirector(getDetails(movieId).getDirector());
+            result.setGenres(getDetails(movieId).getGenres());
 
             newList.add(result);
+        }
+
+            for (int i = 0; i<nextMovieByGenre.getResults().size(); i++) {
+
+                Result result2 = new Result();
+                result2.setId(nextMovieByGenre.getResults().get(i).getId());
+                result2.setTitle(nextMovieByGenre.getResults().get(i).getTitle());
+                result2.setOverview(nextMovieByGenre.getResults().get(i).getOverview());
+                result2.setBackdropPath(nextMovieByGenre.getResults().get(i).getBackdropPath());
+
+                int movieId = nextMovieByGenre.getResults().get(i).getId();
+
+                //add trailer, logo, runtime, Director, genres
+                result2.setTrailer(getMovieTrailer(movieId));
+                result2.setMovieLogos(getMovieLogo(movieId));
+                result2.setRuntime(getDetails(movieId).getRuntime());
+                result2.setDirector(getDetails(movieId).getDirector());
+                result2.setGenres(getDetails(movieId).getGenres());
+
+                newList.add(result2);
 
         }
 

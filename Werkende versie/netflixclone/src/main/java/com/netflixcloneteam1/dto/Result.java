@@ -2,6 +2,7 @@
 package com.netflixcloneteam1.dto;
 
 import java.util.List;
+import com.netflixcloneteam1.dto.Result;
 
 public class Result {
     private String backdropPath;
@@ -9,7 +10,7 @@ public class Result {
     private Integer id;
     private String overview;
     private String title;
-
+//    private Integer runtime;
     private Boolean adult;
     private String originalLanguage;
     private String originalTitle;
@@ -59,4 +60,12 @@ public class Result {
     public void setTitle(String title) {
         this.title = title;
     }
+
+//    public Integer getRuntime() {
+//        return runtime;
+//    }
+//
+//    public void setRuntime(Integer runtime) {
+//        this.runtime = runtime;
+//    }
 }
