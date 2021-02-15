@@ -1,34 +1,19 @@
+package com.netflixcloneteam1.view.movieDetails;
 
-package com.netflixcloneteam1.dto;
+import com.netflixcloneteam1.dto.Credits;
+import com.netflixcloneteam1.dto.Genre;
 
-
-import java.io.Serializable;
 import java.util.List;
-import com.netflixcloneteam1.dto.movieTrailer.ResultsTrailer;
 
-public class MovieDetails implements Serializable
-{
-
+public class MovieDetailsView {
     private String backdropPath;
     private List<Genre> genres = null;
-
-    // credits is getting the full cast and crew
-    private Credits credits;
+    private String director;
     private Integer id;
     private String overview;
     private Integer runtime;
     private String title;
-
-
-    private final static long serialVersionUID = 7439210477757914778L;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private String trailer;
 
     public String getBackdropPath() {
         return backdropPath;
@@ -46,9 +31,21 @@ public class MovieDetails implements Serializable
         this.genres = genres;
     }
 
-    public Credits getCredits() { return credits; }
+    public String getDirector() {
+        return director;
+    }
 
-    public void setCredits(Credits credits) { this.credits = credits; }
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getOverview() {
         return overview;
@@ -73,4 +70,10 @@ public class MovieDetails implements Serializable
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) { this.trailer = trailer;}
 }

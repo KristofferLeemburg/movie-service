@@ -6,17 +6,17 @@ import java.util.List;
 
 public class Credits implements Serializable
 {
-    public List<Cast> cast = null;
+//    public List<Cast> cast = null;
     public List<Crew> crew = null;
 
 
-    public List<Cast> getCast() {
-        return cast;
-    }
-
-    public void setCast(List<Cast> cast) {
-        this.cast = cast;
-    }
+//    public List<Cast> getCast() {
+//        return cast;
+//    }
+//
+//    public void setCast(List<Cast> cast) {
+//        this.cast = cast;
+//    }
 
     public List<Crew> getCrew() {
         return crew;
